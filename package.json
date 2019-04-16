@@ -1,0 +1,26 @@
+{
+  "name": "node-weblog-api-mongoose",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "author": "Charles Nicoletti",
+  "license": "",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.22",
+    "multer": "^1.4.1",
+    "nanoid": "^2.0.1"
+  }
+}
