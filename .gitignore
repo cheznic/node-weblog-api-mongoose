@@ -1,6 +1,11 @@
 # ignore file with credentials
 secure.js
 
+# generated image files
+images/*.jpg
+images/*.jpeg
+images/*.png
+
 # Logs
 logs
 *.log
