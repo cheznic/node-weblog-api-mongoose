@@ -55,7 +55,8 @@ app.use((error, req, res, next) => {
    console.error(error);
    const status = error.statusCode || 500;
    const errors = error.errors || {};
-   res.status(status).json({ message: error.message, errors: errors });
+   const message = err.message || '500.HTTP.INTERNAL_SYSTEM_ERROR';
+   res.status(status).json({ message: message, errors: errors });
 });
 
 // Initialize mongo/mongoose and start HTTP server
