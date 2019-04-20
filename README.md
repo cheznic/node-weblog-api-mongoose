@@ -10,3 +10,8 @@ This is project is functional but is more a POC for the technologies listed rath
 - [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) JsonWebToken implementation for node.js
 - [multer](https://github.com/expressjs/multer) Node.js middleware for handling `multipart/form-data`.
 - [nonoid](https://github.com/ai/nanoid) A tiny (141 bytes), secure, URL-friendly, unique string ID generator for JavaScript
+
+### Testing with
+- [Mocha](https://mochajs.org/) Mocha is a simple JavaScript test framework running on Node.js and in the browser.
+- [Chai](https://www.chaijs.com/) Chai is a BDD / TDD assertion library for Node.js and the browser to be paired with any javascript testing framework.
+- [Sinon](https://sinonjs.org/) Sinon is a standalone test spies, stubs and mocks for JavaScript. It works with any unit testing framework.
