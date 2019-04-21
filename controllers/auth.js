@@ -42,17 +42,13 @@ exports.login = async (req, res, next) => {
    try {
       const user = await User.findOne({ email: req.body.email })
       if (!user) {
-         const error = new Error('401.APP.EMAIL_NOT_FOUND');
-         error.statusCode = 401;
-         throw error;
+         throw401();
       }
 
       const match = await bcrypt.compare(req.body.password, user.password);
 
       if (!match) {
-         const error = new Error('401.APP.INCORRECT_PASSWORD');
-         error.statusCode = 401;
-         throw error;
+         throw401();
       }
       const token = await jwt.sign(
          {
@@ -73,8 +69,14 @@ exports.login = async (req, res, next) => {
                userId: user._id.toString()
             }
          );
+      return;
    } catch (err) {
+      if (!err.statusCode) {
+         err.statusCode = 500;
+         err.message = '500.http.INTERNAL_SERVER_ERROR';
+      }
       next(err);
+      return err;
    }
 };
 
@@ -82,9 +84,7 @@ exports.getUserStatus = async (req, res, next) => {
    try {
       const user = await User.findById(req.userId)
       if (!user) {
-         const error = new Error('404.HTTP.USER_NOT_FOUND');
-         error.statusCode = 404;
-         throw error;
+         throw404();
       }
 
       res
@@ -102,9 +102,7 @@ exports.updateUserStatus = async (req, res, next) => {
    try {
       const user = await User.findById(req.userId)
       if (!user) {
-         const error = new Error('404.HTTP.USER_NOT_FOUND');
-         error.statusCode = 404;
-         throw error;
+         throw404();
       }
       user.status = req.body.status;
       await user.save();
@@ -117,3 +115,24 @@ exports.updateUserStatus = async (req, res, next) => {
       next(err);
    };
 };
+
+const throw401 = () => {
+   throwErr(401, '401.http.UNAUTHORIZED');
+}
+
+const throw404 = () => {
+   throwErr(404, '404.http.NOT_FOUND');
+}
+
+const throw422 = () => {
+   throwErr(422, '422.http.UNPROCESSABLE_ENTITY');
+}
+const throw500 = () => {
+   throwErr(500, '500.http.INTERNAL_SERVER_ERROR');
+}
+
+const throwErr = (code, message) => {
+   const error = new Error(message);
+   error.statusCode = code;
+   throw error;
+} 
